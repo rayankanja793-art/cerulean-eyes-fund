@@ -167,3 +167,72 @@ nav ul li a.active{
     font-size:20px;
     margin-bottom:12px;
 }
+/* Membership Page */
+
+.membership{
+    padding:120px 20px 80px;
+}
+
+.membership h1{
+    text-align:center;
+    color:#0057b8;
+    font-size:48px;
+    margin-bottom:20px;
+}
+
+.membership p{
+    text-align:center;
+    font-size:20px;
+    margin-bottom:40px;
+}
+
+.member-cards{
+    display:flex;
+    gap:25px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-bottom:50px;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    width:280px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    text-align:center;
+}
+
+.card h2{
+    color:#0057b8;
+    margin-bottom:15px;
+}
+
+.register-form{
+    max-width:600px;
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.register-form input{
+    padding:15px;
+    font-size:18px;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+.register-form button{
+    background:#0057b8;
+    color:white;
+    border:none;
+    padding:16px;
+    font-size:18px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.register-form button:hover{
+    background:#003d80;
+}
