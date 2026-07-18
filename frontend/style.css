@@ -300,3 +300,10 @@ nav ul li a.active{
 .loan-form button:hover{
     background:#003f87;
 }
+footer{
+    background:#0057b8;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:80px;
+}
