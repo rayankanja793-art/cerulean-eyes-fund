@@ -17,6 +17,8 @@ nav{
 
     background-color: #0057b8;
     padding: 15px 40px;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
 }
 .logo-area{
     display:flex;
