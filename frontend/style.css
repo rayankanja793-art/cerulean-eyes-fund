@@ -10,14 +10,14 @@ nav{
     position: sticky;
     top: 0;
     z-index: 1000;
-}
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:#0057b8;
-    padding:15px 40px;
-}
 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: #0057b8;
+    padding: 15px 40px;
+}
 .logo-area{
     display:flex;
     align-items:center;
