@@ -450,3 +450,11 @@ footer{
 .login-links a:hover{
     text-decoration:underline;
 }
+.login-form select{
+    width:100%;
+    padding:14px;
+    margin:12px 0;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+}
