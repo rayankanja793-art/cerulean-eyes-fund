@@ -123,3 +123,8 @@ footer{
 nav ul li a.active{
     color: #ffd700;
 }
+nav ul li a.active{
+    color: #ffd700;
+    border-bottom: 3px solid #ffd700;
+    padding-bottom: 5px;
+}
