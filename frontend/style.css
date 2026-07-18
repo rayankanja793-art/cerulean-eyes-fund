@@ -1,9 +1,14 @@
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#eef3fa;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-
+body{
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eef3fa;
+    overflow-x: hidden;
+}
 /* Navigation */
 
 nav{
@@ -15,10 +20,10 @@ nav{
     justify-content: space-between;
     align-items: center;
 
-    background-color: #0057b8;
+    background: #0057b8;
     padding: 15px 40px;
-    width: 100%;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+
+    box-sizing: border-box;
 }
 .logo-area{
     display:flex;
