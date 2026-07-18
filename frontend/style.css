@@ -380,3 +380,73 @@ footer{
 .contact-form button:hover{
     background:#003f87;
 }
+/* Login Page */
+
+.login{
+    text-align:center;
+    padding:80px 20px;
+}
+
+.login h1{
+    font-size:48px;
+    color:#0057b8;
+    margin-bottom:15px;
+}
+
+.login-form{
+    width:450px;
+    max-width:90%;
+    margin:50px auto;
+    background:white;
+    padding:40px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.login-form input{
+    width:100%;
+    padding:15px;
+    margin:15px 0;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+}
+
+.remember{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:15px 0 25px;
+    font-size:16px;
+}
+
+.login-form button{
+    width:100%;
+    padding:15px;
+    background:#0057b8;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+.login-form button:hover{
+    background:#003f87;
+}
+
+.login-links{
+    margin-top:20px;
+    display:flex;
+    justify-content:space-between;
+}
+
+.login-links a{
+    text-decoration:none;
+    color:#0057b8;
+    font-weight:bold;
+}
+
+.login-links a:hover{
+    text-decoration:underline;
+}
