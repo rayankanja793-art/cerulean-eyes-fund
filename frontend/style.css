@@ -236,3 +236,67 @@ nav ul li a.active{
 .register-form button:hover{
     background:#003d80;
 }
+/* Loans Page */
+
+.loans{
+    text-align:center;
+    padding:80px 20px;
+}
+
+.loans h1{
+    font-size:48px;
+    color:#0057b8;
+    margin-bottom:15px;
+}
+
+.loan-cards{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+    margin:50px 0;
+}
+
+.loan-card{
+    background:white;
+    padding:30px;
+    width:280px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.loan-card h3{
+    color:#0057b8;
+    margin-bottom:15px;
+}
+
+.loan-form{
+    width:450px;
+    max-width:90%;
+    margin:30px auto;
+}
+
+.loan-form input,
+.loan-form select{
+    width:100%;
+    padding:15px;
+    margin:12px 0;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+}
+
+.loan-form button{
+    width:100%;
+    padding:15px;
+    background:#0057b8;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+.loan-form button:hover{
+    background:#003f87;
+}
