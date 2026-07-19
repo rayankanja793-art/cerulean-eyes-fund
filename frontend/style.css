@@ -512,3 +512,16 @@ table td{
     border-bottom:1px solid #ddd;
     text-align:center;
 }
+table button{
+    background:#0057b8;
+    color:white;
+    border:none;
+    padding:8px 15px;
+    margin:3px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+table button:hover{
+    background:#003f87;
+}
