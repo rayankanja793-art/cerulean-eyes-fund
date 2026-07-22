@@ -3,7 +3,9 @@ const bcrypt = require("bcryptjs");
 
 const Admin = require("./models/Admin");
 
-mongoose.connect("mongodb://127.0.0.1:27017/ceruleanfunds")
+require("dotenv").config();
+
+mongoose.connect(process.env.MONGO_URI)
 .then(async () => {
 
     const hashedPassword = await bcrypt.hash("Admin@123", 10);
