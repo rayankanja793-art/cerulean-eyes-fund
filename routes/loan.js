@@ -1,3 +1,5 @@
+const upload = require("../config/multer");
+const User = require("../models/User");
 const express = require("express");
 const router = express.Router();
 const path = require("path");
@@ -10,30 +12,56 @@ router.get("/loan", (req, res) => {
 });
 
 // Save Loan Application
-router.post("/apply-loan", async (req, res) => {
+router.post(
+    "/apply-loan",
+    upload.fields([
+        { name: "idFront", maxCount: 1 },
+        { name: "idBack", maxCount: 1 }
+    ]),
+    async (req, res) => {
 
-    try {
+        try {
 
-        const { userEmail, amount, duration, purpose } = req.body;
+            const { amount, duration, purpose } = req.body;
 
-        const loan = new Loan({
-            userEmail,
-            amount,
-            duration,
-            purpose
-        });
+            // Temporary until sessions are added
+            const userEmail = req.body.userEmail.trim().toLowerCase();
+   
+        const user = await User.findOne({
+    email: new RegExp("^" + userEmail + "$", "i")
+});
+           
+    if (!user) {
+                return res.send("User not found.");
+            }
 
-        await loan.save();
+            const loan = new Loan({
+                fullName: user.fullname,
+                phone: user.phone,
+                nationalId: user.nationalId,
+                userEmail: user.email,
 
-        res.send("✅ Loan application submitted successfully!");
+                amount,
+                duration,
+                purpose,
 
-    } catch (err) {
+                idFront: req.files.idFront[0].path,
+                idBack: req.files.idBack[0].path
+            });
 
-        console.log(err);
-        res.send("❌ Failed to submit loan application.");
+            await loan.save();
+
+            res.redirect("/dashboard");
+
+        } catch (err) {
+
+            console.log(err);
+            res.send("❌ Failed to submit loan application.");
+
+        }
 
     }
+);
 
-});
 
 module.exports = router;

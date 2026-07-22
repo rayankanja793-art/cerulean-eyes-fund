@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transfer Money</title>
+
+<style>
+
+body{
+    background:#eef4fb;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+.container{
+    width:450px;
+    margin:60px auto;
+}
+
+.card{
+    background:white;
+    padding:35px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+h2{
+    text-align:center;
+    color:#0057b8;
+}
+
+label{
+    display:block;
+    margin-top:20px;
+    font-weight:bold;
+}
+
+input,textarea{
+    width:100%;
+    padding:14px;
+    margin-top:8px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    box-sizing:border-box;
+}
+
+button{
+    width:100%;
+    margin-top:25px;
+    padding:15px;
+    border:none;
+    background:#0057b8;
+    color:white;
+    font-size:17px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#004090;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<h2>💸 Transfer Money</h2>
+
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+
+    <a href="/dashboard"
+       style="
+       text-decoration:none;
+       background:#0057b8;
+       color:white;
+       padding:10px 18px;
+       border-radius:8px;
+       font-weight:bold;">
+       ← Dashboard
+    </a>
+
+    <h2 style="margin:0;color:#0057b8;">
+        💸 Transfer Money
+    </h2>
+
+    <div style="width:100px;"></div>
+
+</div>
+
+<form action="/transfer" method="POST">
+
+<label>Recipient Member Code</label>
+
+<input
+type="text"
+name="memberCode"
+placeholder="CF000009"
+required>
+
+<div id="receiverInfo"
+style="
+margin-top:15px;
+padding:15px;
+background:#eef4fb;
+border-radius:10px;
+display:none;
+">
+
+<h3>Recipient</h3>
+
+<p id="receiverName"></p>
+
+<p id="receiverCode"></p>
+
+</div>
+
+<label>Amount (KES)</label>
+
+<input
+type="number"
+name="amount"
+required>
+
+<label>Description (Optional)</label>
+
+<textarea
+name="description"
+rows="3"></textarea>
+
+<button type="submit">
+Send Money
+</button>
+
+</form>
+
+</div>
+
+</div>
+<script>
+const params = new URLSearchParams(window.location.search);
+
+if (params.get("success") === "1") {
+    document.getElementById("successMessage").style.display = "block";
+}
+const memberInput = document.querySelector("input[name='memberCode']");
+
+memberInput.addEventListener("keyup", async () => {
+
+    const code = memberInput.value.trim();
+
+    if(code.length < 3){
+        document.getElementById("receiverInfo").style.display="none";
+        return;
+    }
+
+    const res = await fetch("/member/" + code);
+
+    const data = await res.json();
+
+    if(data.found){
+
+        document.getElementById("receiverInfo").style.display="block";
+
+        document.getElementById("receiverName").innerText =
+            "👤 " + data.fullname;
+
+        document.getElementById("receiverCode").innerText =
+            "🆔 " + data.memberCode;
+
+    }else{
+
+        document.getElementById("receiverInfo").style.display="block";
+
+        document.getElementById("receiverName").innerText =
+            "❌ Member not found";
+
+        document.getElementById("receiverCode").innerText = "";
+
+    }
+
+});
+
+</script>
+
+
+</body>
+</html>

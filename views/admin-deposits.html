@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Deposits</title>
+
+<style>
+
+body{
+    margin:0;
+    background:#eef4fb;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+header{
+    background:#0057b8;
+    color:white;
+    padding:20px 40px;
+}
+
+.header-box{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.header-box a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.container{
+    max-width:1200px;
+    margin:40px auto;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:30px;
+    box-shadow:0 8px 25px rgba(0,0,0,.12);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:15px;
+    border-bottom:1px solid #ddd;
+    text-align:left;
+}
+
+th{
+    background:#0057b8;
+    color:white;
+}
+
+button{
+    background:#28a745;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1e7e34;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="header-box">
+
+<h1>Deposit Requests</h1>
+
+<a href="/admin">← Admin Dashboard</a>
+
+</div>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Member</th>
+<th>Phone</th>
+<th>Amount</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="depositTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+fetch("/admin/deposits/list")
+.then(res=>res.json())
+.then(deposits=>{
+
+    const table=document.getElementById("depositTable");
+
+    deposits.forEach(dep=>{
+
+        table.innerHTML += `
+        <tr>
+
+            <td>${dep.member.fullname}</td>
+            <td>${dep.phone}</td>
+            <td>KES ${dep.amount}</td>
+            <td>${dep.status}</td>
+
+            <td>
+
+            <button onclick="approve('${dep._id}')">
+
+            Approve
+
+            </button>
+
+            </td>
+
+        </tr>
+        `;
+
+    });
+
+});
+
+function approve(id){
+
+    fetch("/admin/deposit/"+id,{
+        method:"POST"
+    })
+    .then(res=>res.text())
+    .then(msg=>{
+        alert(msg);
+        location.reload();
+    });
+
+}
+
+</script>
+
+</body>
+</html>

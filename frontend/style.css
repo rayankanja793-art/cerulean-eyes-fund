@@ -525,3 +525,37 @@ table button{
 table button:hover{
     background:#003f87;
 }
+.approve-btn{
+
+    background:#28a745;
+    color:white;
+    border:none;
+    padding:8px 15px;
+    border-radius:5px;
+    cursor:pointer;
+    margin-bottom:5px;
+
+}
+
+.approve-btn:hover{
+
+    background:#218838;
+
+}
+
+.reject-btn{
+
+    background:#dc3545;
+    color:white;
+    border:none;
+    padding:8px 15px;
+    border-radius:5px;
+    cursor:pointer;
+
+}
+
+.reject-btn:hover{
+
+    background:#c82333;
+
+}

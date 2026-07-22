@@ -56,6 +56,20 @@ body{
     text-align:center;
     margin-top:20px;
 }
+.back-btn{
+    display:inline-block;
+    margin-bottom:20px;
+    color:#0057b8;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:15px;
+    transition:.3s;
+}
+
+.back-btn:hover{
+    color:#004090;
+    transform:translateX(-4px);
+}
 </style>
 
 </head>
@@ -63,14 +77,20 @@ body{
 
 <div class="login-container">
 
-<h1>Login</h1>
+<a href="/" class="back-btn">← Back to Home</a>
+
+<h1>Member Login</h1>
+
+<p style="text-align:center;color:#666;margin-bottom:25px;">
+Login using your registered phone number.
+</p>
 
 <form action="/login" method="POST">
 
 <input
-type="email"
-name="email"
-placeholder="Email Address"
+type="tel"
+name="phone"
+placeholder="07XXXXXXXX or +2547XXXXXXXX"
 required>
 
 <input

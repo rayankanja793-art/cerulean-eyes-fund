@@ -94,22 +94,131 @@
             padding:20px;
             margin-top:50px;
         }
+        .login-btn{
+    border:2px solid white;
+    padding:8px 18px;
+    border-radius:25px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    margin-left:20px;
+    transition:.3s;
+}
+
+.login-btn:hover{
+    background:white;
+    color:#0057b8;
+}
+
+.register-btn{
+    background:white;
+    color:#0057b8;
+    padding:10px 20px;
+    border-radius:25px;
+    text-decoration:none;
+    font-weight:bold;
+    margin-left:10px;
+    transition:.3s;
+}
+
+.register-btn:hover{
+    background:#ffd54f;
+    color:#003d80;
+}
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 60px;
+    background:#0057b8;
+}
+
+.logo-link{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+}
+
+.logo-link img{
+    width:50px;
+    height:50px;
+    object-fit:contain;
+    border-radius:50%;
+    background:white;
+    padding:3px;
+}
+
+.logo-link span{
+    color:white;
+    font-size:32px;
+    font-weight:bold;
+}
+
+.logo-link:hover{
+    opacity:0.9;
+}
+.logo a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+}
+
+.logo span{
+    color:white;
+    font-size:30px;
+    font-weight:bold;
+    letter-spacing:.5px;
+}
+.logo-link:hover{
+    opacity:0.9;
+}
+.admin-btn{
+    background:#222;
+    color:white;
+    padding:10px 20px;
+    border-radius:25px;
+    text-decoration:none;
+    font-weight:bold;
+    margin-left:10px;
+    transition:.3s;
+}
+
+.admin-btn:hover{
+    background:#000;
+    transform:translateY(-2px);
+}
     </style>
 </head>
 
 <body>
 
-<nav>
-    <h2>Cerulean Funds</h2>
+<nav class="navbar">
+
+<div class="logo">
+    <a href="/" class="logo-link">
+        <img src="/images/logo.png" alt="Cerulean Funds Logo">
+        <span>Cerulean Funds</span>
+    </a>
+</div>
 
     <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Loans</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/loans">Loans</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
     </ul>
-</nav>
 
+<div class="buttons">
+    <a href="/login" class="login-btn">Login</a>
+
+    <a href="/portal" class="admin-btn">Portal</a>
+
+    <a href="/register" class="register-btn">Register</a>
+</div>
+
+</nav>
 <section class="hero">
 
     <h1>Fast & Secure Loans</h1>

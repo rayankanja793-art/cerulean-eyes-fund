@@ -1,53 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apply for Loan</title>
+
+<title>Cerulean Funds - Loan Application</title>
 
 <style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
 body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#eef3fb;
+
+    background:#eef4ff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+
 }
 
 .container{
-    width:500px;
-    margin:40px auto;
+
+    width:700px;
     background:white;
     padding:40px;
     border-radius:15px;
     box-shadow:0 10px 25px rgba(0,0,0,.15);
+
 }
 
 h1{
+
     text-align:center;
     color:#0057b8;
+    margin-bottom:30px;
+
 }
 
-input,select,textarea{
+label{
+
+    display:block;
+    margin-top:20px;
+    margin-bottom:8px;
+    font-weight:bold;
+    color:#333;
+
+}
+
+input,
+select,
+textarea{
+
     width:100%;
     padding:14px;
-    margin:15px 0;
     border:1px solid #ccc;
     border-radius:8px;
     font-size:16px;
+
+}
+
+textarea{
+
+    resize:none;
+
+}
+
+.file-box{
+
+    margin-top:20px;
+
 }
 
 button{
+
     width:100%;
+    margin-top:35px;
     padding:15px;
-    background:#0057b8;
-    color:white;
     border:none;
     border-radius:8px;
+    background:#0057b8;
+    color:white;
     font-size:18px;
     cursor:pointer;
+    transition:.3s;
+
 }
 
 button:hover{
+
     background:#003f88;
+
 }
+
 </style>
 
 </head>
@@ -58,34 +109,63 @@ button:hover{
 
 <h1>Loan Application</h1>
 
-<form action="/apply-loan" method="POST">
+<form action="/apply-loan" method="POST" enctype="multipart/form-data">
 
+<label>Email Address</label>
 <input
 type="email"
 name="userEmail"
-placeholder="Email Address"
 required>
 
+<label>Loan Amount</label>
 <input
 type="number"
 name="amount"
-placeholder="Loan Amount"
 required>
 
+<label>Repayment Period</label>
+
 <select name="duration" required>
-<option value="">Repayment Period</option>
+
+<option value="">Select Period</option>
 <option>1 Month</option>
 <option>3 Months</option>
 <option>6 Months</option>
 <option>12 Months</option>
 <option>24 Months</option>
+
 </select>
+
+<label>Purpose of the Loan</label>
 
 <textarea
 name="purpose"
 rows="5"
-placeholder="Purpose of the loan"
 required></textarea>
+
+<div class="file-box">
+
+<label>Upload Front of National ID</label>
+
+<input
+type="file"
+name="idFront"
+accept=".jpg,.jpeg,.png"
+required>
+
+</div>
+
+<div class="file-box">
+
+<label>Upload Back of National ID</label>
+
+<input
+type="file"
+name="idBack"
+accept=".jpg,.jpeg,.png"
+required>
+
+</div>
 
 <button type="submit">
 Submit Loan Application

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Portal</title>
+
+<style>
+
+body{
+    margin:0;
+    background:#eef4fb;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+.container{
+    width:700px;
+    margin:100px auto;
+}
+
+.card{
+    background:white;
+    padding:40px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+    text-align:center;
+}
+
+h1{
+    color:#0057b8;
+    margin-bottom:35px;
+}
+
+.options{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+}
+
+.portal-btn{
+    display:block;
+    width:220px;
+    padding:20px;
+    background:#0057b8;
+    color:white;
+    text-decoration:none;
+    border-radius:12px;
+    font-size:20px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.portal-btn:hover{
+    background:#004090;
+    transform:translateY(-3px);
+}
+
+.back{
+    display:inline-block;
+    margin-top:30px;
+    text-decoration:none;
+    color:#0057b8;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<h1>Management Portal</h1>
+
+<div class="options">
+
+<a href="/admin/login" class="portal-btn">
+👨‍💼<br><br>
+Admin Portal
+</a>
+
+<a href="/ceo/login" class="portal-btn">
+👑<br><br>
+CEO Portal
+</a>
+
+</div>
+
+<a href="/" class="back">
+← Back to Home
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>
