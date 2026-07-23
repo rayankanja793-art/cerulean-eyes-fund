@@ -3,6 +3,7 @@ const router = express.Router();
 const path = require("path");
 
 const Loan = require("../models/Loan");
+const User = require("../models/User");
 
 // Change these later
 const CEO_USERNAME = "ceo";
@@ -65,7 +66,31 @@ router.get("/ceo/json", async (req, res) => {
     }
 
 });
+// ===========================
+// CEO Members List
+// ===========================
 
+router.get("/ceo/members/json", async (req, res) => {
+
+    if (!req.session.ceo) {
+        return res.status(401).send("Unauthorized");
+    }
+
+    try {
+
+        const members = await User.find().sort({ createdAt: -1 });
+
+        res.json(members);
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.status(500).send("Failed to load members.");
+
+    }
+
+});
 // CEO Logout
 router.get("/ceo/logout", (req, res) => {
 
