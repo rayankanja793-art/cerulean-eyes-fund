@@ -130,6 +130,82 @@ tbody tr:hover{
     }
 
 }
+/* ===========================
+   MEMBER CARDS
+=========================== */
+
+#membersContainer{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+    gap:20px;
+}
+
+.member-card{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+    transition:.3s;
+}
+
+.member-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 12px 25px rgba(0,87,184,.25);
+}
+
+.member-card h3{
+    color:#0057b8;
+    margin:0 0 15px;
+}
+
+.member-item{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid #eee;
+}
+
+.member-item:last-child{
+    border-bottom:none;
+}
+
+.label{
+    color:#666;
+    font-weight:bold;
+}
+
+.value{
+    font-weight:bold;
+    text-align:right;
+    word-break:break-word;
+}
+
+.wallet{
+    color:#27ae60;
+    font-size:22px;
+    font-weight:bold;
+}
+
+@media(max-width:768px){
+
+    #membersContainer{
+        grid-template-columns:1fr;
+    }
+
+    .member-card{
+        padding:18px;
+    }
+
+    .member-item{
+        flex-direction:column;
+        gap:5px;
+    }
+
+    .value{
+        text-align:left;
+    }
+
+}
 </style>
 
 </head>
@@ -154,23 +230,7 @@ tbody tr:hover{
 
 <div class="table-wrapper">
 
-<table>
-
-<thead>
-
-<tr>
-<th>Member Code</th>
-<th>Name</th>
-<th>Phone</th>
-<th>Email</th>
-<th>Wallet</th>
-</tr>
-
-</thead>
-
-<tbody id="memberTable"></tbody>
-
-</table>
+<div id="membersContainer"></div>
 
 </div>
 
@@ -182,23 +242,42 @@ fetch("/ceo/members/json")
 .then(res => res.json())
 .then(members => {
 
-    console.log(members);
+    const container = document.getElementById("membersContainer");
 
-    const table = document.getElementById("memberTable");
-    table.innerHTML = "";
+    container.innerHTML = "";
 
     members.forEach(member => {
 
-        table.innerHTML += `
-        <tr>
-            <td>${member.memberCode || "-"}</td>
-            <td>${member.fullname || "-"}</td>
-            <td>${member.phone || "-"}</td>
-            <td>${member.email || "-"}</td>
-            <td class="wallet">
-                KES ${(member.wallet || 0).toLocaleString()}
-            </td>
-        </tr>
+        container.innerHTML += `
+
+        <div class="member-card">
+
+            <h3>👤 ${member.fullname || "-"}</h3>
+
+            <div class="member-item">
+                <span class="label">Member Code</span>
+                <span class="value">${member.memberCode || "-"}</span>
+            </div>
+
+            <div class="member-item">
+                <span class="label">Phone</span>
+                <span class="value">${member.phone || "-"}</span>
+            </div>
+
+            <div class="member-item">
+                <span class="label">Email</span>
+                <span class="value">${member.email || "-"}</span>
+            </div>
+
+            <div class="member-item">
+                <span class="label">Wallet Balance</span>
+                <span class="wallet">
+                    KES ${(member.wallet || 0).toLocaleString()}
+                </span>
+            </div>
+
+        </div>
+
         `;
 
     });
