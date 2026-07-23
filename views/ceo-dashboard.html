@@ -235,10 +235,16 @@ tbody tr:nth-child(even){
     </div>
 
     <div class="nav-links">
-        <a href="/admin">Admin</a>
-        <a href="/ceo">CEO Dashboard</a>
-        <a href="/">Logout</a>
-    </div>
+    <a href="/ceo">📊 Dashboard</a>
+
+    <a href="/ceo/members-page">👥 Members</a>
+
+    <a href="/admin">💰 Loans</a>
+
+    <a href="/ceo/deposits">🏦 Deposits</a>
+
+    <a href="/ceo/logout">🚪 Logout</a>
+</div>
 
 </div>
 <h1 class="title">
@@ -603,7 +609,34 @@ function filterStatus(status){
     event.target.classList.add("active");
 
 }
+fetch("/ceo/members")
+.then(res => res.json())
+.then(members => {
 
+    const table = document.getElementById("memberTable");
+
+    table.innerHTML = "";
+
+    members.forEach(member => {
+
+        table.innerHTML += `
+        <tr>
+            <td>${member.memberCode}</td>
+            <td>${member.fullname}</td>
+            <td>${member.phone}</td>
+            <td>${member.email}</td>
+            <td>
+                <strong style="color:#27ae60;">
+                    KES ${member.wallet.toLocaleString()}
+                </strong>
+            </td>
+        </tr>
+        `;
+
+    });
+
+})
+.catch(err => console.log(err));
 </script>
 
 </body>

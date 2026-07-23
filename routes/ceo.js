@@ -101,5 +101,15 @@ router.get("/ceo/logout", (req, res) => {
     });
 
 });
+// CEO Members Page
+router.get("/ceo/members-page", (req, res) => {
+
+    if (!req.session.ceo) {
+        return res.redirect("/ceo/login");
+    }
+
+    res.sendFile(path.join(__dirname, "../views/ceo-members.html"));
+
+});
 
 module.exports = router;
