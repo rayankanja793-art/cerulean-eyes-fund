@@ -13,8 +13,9 @@ body{
 }
 
 .container{
-    width:400px;
-    margin:100px auto;
+    width:90%;
+    max-width:400px;
+    margin:80px auto;
 }
 
 .card{
@@ -62,6 +63,46 @@ button:hover{
     color:#0057b8;
     text-decoration:none;
     font-weight:bold;
+}
+/* ==========================
+   Mobile Responsive
+========================== */
+
+@media (max-width:768px){
+
+    body{
+        padding:20px;
+    }
+
+    .container{
+        width:100%;
+        margin:40px auto;
+    }
+
+    .card{
+        padding:25px;
+        border-radius:12px;
+        box-sizing:border-box;
+    }
+
+    h2{
+        font-size:30px;
+    }
+
+    input{
+        padding:15px;
+        font-size:16px;
+    }
+
+    button{
+        padding:16px;
+        font-size:18px;
+    }
+
+    .back{
+        font-size:16px;
+    }
+
 }
 </style>
 
