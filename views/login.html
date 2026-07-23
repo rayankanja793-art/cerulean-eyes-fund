@@ -14,7 +14,8 @@ body{
 }
 
 .login-container{
-    width:420px;
+    width:90%;
+    max-width:420px;
     margin:60px auto;
     background:#fff;
     padding:40px;
@@ -69,6 +70,49 @@ body{
 .back-btn:hover{
     color:#004090;
     transform:translateX(-4px);
+}
+/* ==========================
+   Mobile Responsive
+========================== */
+
+@media (max-width:768px){
+
+    body{
+        padding:20px;
+    }
+
+    .login-container{
+        width:100%;
+        margin:30px auto;
+        padding:25px;
+        border-radius:12px;
+        box-sizing:border-box;
+    }
+
+    .login-container h1{
+        font-size:32px;
+        margin-bottom:20px;
+    }
+
+    .login-container p{
+        font-size:16px;
+        line-height:1.5;
+        word-break:break-word;
+    }
+
+    .login-container input{
+        padding:15px;
+        font-size:16px;
+    }
+
+    .login-container button{
+        padding:16px;
+        font-size:18px;
+    }
+
+    .back-btn{
+        font-size:16px;
+    }
 }
 </style>
 
