@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require("path");
 
 const Loan = require("../models/Loan");
-const Investment = require("../models/Investment");
+const Investment = require("../models/investment");
 const Deposit = require("../models/Deposit");
 const User = require("../models/User");
 
