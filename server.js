@@ -6,6 +6,10 @@ const path = require("path");
 
 const session = require("express-session");
 const { MongoStore } = require("connect-mongo");
+const investmentRoutes = require("./routes/investment");
+const depositRoutes = require("./routes/deposit");
+
+console.log("depositRoutes =", depositRoutes);
 
 const app = express();
 
@@ -53,17 +57,25 @@ const adminRoutes = require("./routes/admin");
 const ceoRoutes = require("./routes/ceo");
 const membersRoutes = require("./routes/members");
 
+// Register all routes
 app.use(authRoutes);
 app.use(loanRoutes);
 app.use(adminRoutes);
 app.use("/", ceoRoutes);
 app.use(membersRoutes);
-
+app.use(investmentRoutes);
+app.use(depositRoutes);
 // ===========================
 // Home Page
 // ===========================
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "index.html"));
+});
+// ===========================
+// Investment Plans
+// ===========================
+app.get("/invest", (req, res) => {
+    res.sendFile(path.join(__dirname, "views", "invest.html"));
 });
 
 // ===========================

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Deposit Management</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#eef3f9;
+}
+
+header{
+    background:#0057b8;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+.top-bar{
+    width:95%;
+    max-width:1200px;
+    margin:20px auto;
+}
+
+.back-btn{
+    display:inline-block;
+    text-decoration:none;
+    background:#0057b8;
+    color:white;
+    padding:12px 22px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.back-btn:hover{
+    background:#004090;
+}
+
+.container{
+    width:95%;
+    max-width:1200px;
+    margin:20px auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+}
+
+th{
+    background:#0057b8;
+    color:white;
+    padding:15px;
+}
+
+td{
+    padding:15px;
+    text-align:center;
+    border-bottom:1px solid #eee;
+}
+
+tr:hover{
+    background:#f7f9fc;
+}
+
+button{
+    border:none;
+    padding:8px 16px;
+    border-radius:6px;
+    cursor:pointer;
+    color:white;
+    font-weight:bold;
+}
+
+.approve{
+    background:#27ae60;
+}
+
+.reject{
+    background:#e74c3c;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>💰 Deposit Management</h1>
+
+<p>Manage all member deposits</p>
+
+</header>
+
+<div class="top-bar">
+
+<a href="/ceo" class="back-btn">
+← Return to Dashboard
+</a>
+
+</div>
+
+<div class="container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Member</th>
+<th>Phone</th>
+<th>Amount</th>
+<th>Method</th>
+<th>Status</th>
+<th>Date</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="depositTable">
+
+<tr>
+
+<td colspan="7">
+No deposits yet.
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+<script>
+
+async function approveDeposit(id){
+
+    if(!confirm("Approve this deposit?")) return;
+
+    const res = await fetch("/ceo/deposits/approve/" + id,{
+        method:"POST"
+    });
+
+    const data = await res.json();
+
+    alert(data.message);
+
+    location.reload();
+
+}
+
+fetch("/ceo/deposits/json")
+
+.then(res=>res.json())
+
+.then(deposits=>{
+
+    const table=document.getElementById("depositTable");
+
+    table.innerHTML="";
+
+    deposits.forEach(deposit=>{
+
+        table.innerHTML+=`
+
+        <tr>
+
+            <td>${deposit.member?.fullname || "-"}</td>
+
+            <td>${deposit.phone}</td>
+
+            <td>KES ${deposit.amount.toLocaleString()}</td>
+
+            <td>M-Pesa</td>
+
+            <td>${deposit.status}</td>
+
+            <td>${new Date(deposit.createdAt).toLocaleDateString()}</td>
+
+            <td>
+
+                <button
+                class="approve"
+                onclick="approveDeposit('${deposit._id}')">
+
+                Approve
+
+                </button>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+})
+
+.catch(console.error);
+
+</script>
+</body>
+</html>

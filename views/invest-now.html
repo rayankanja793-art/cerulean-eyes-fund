@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Invest Now | Cerulean Funds</title>
+<div class="wallet-box">
+
+    <h3>Your Wallet Balance</h3>
+
+    <h2 id="walletBalance">
+        KES 0
+    </h2>
+
+</div>
+<style>
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#eef3f9;
+}
+
+.container{
+    width:95%;
+    max-width:600px;
+    margin:50px auto;
+    background:white;
+    padding:35px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+}
+
+h1{
+    color:#0057b8;
+    text-align:center;
+    margin-bottom:30px;
+}
+
+label{
+    display:block;
+    margin-top:18px;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+input,
+select{
+    width:100%;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+    box-sizing:border-box;
+}
+
+.result{
+    margin-top:25px;
+    background:#eef8ff;
+    padding:18px;
+    border-radius:10px;
+}
+
+.result h3{
+    color:#0057b8;
+    margin:0 0 10px;
+}
+
+button{
+    width:100%;
+    margin-top:30px;
+    padding:16px;
+    background:#0057b8;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#004090;
+}
+.back-btn{
+    display:block;
+    width:100%;
+    margin-top:18px;
+    padding:16px;
+    text-align:center;
+    text-decoration:none;
+    background:#6c757d;
+    color:white;
+    border-radius:8px;
+    font-size:18px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.back-btn:hover{
+    background:#4b545c;
+    transform:translateY(-2px);
+}
+.wallet-box{
+    background:#0057b8;
+    color:white;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.wallet-box h3{
+    margin:0;
+    font-size:18px;
+}
+
+.wallet-box h2{
+    margin-top:10px;
+    font-size:36px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Invest Now</h1>
+
+<form id="investmentForm" method="POST">
+
+<label>Investment Plan</label>
+
+<select id="plan">
+
+<option value="Bronze">Bronze</option>
+
+<option value="Silver">Silver</option>
+
+<option value="Gold">Gold</option>
+
+<option value="Platinum">Platinum</option>
+
+</select>
+
+<label>Investment Amount (KES)</label>
+
+<input
+type="number"
+id="amount"
+placeholder="Enter amount"
+required>
+
+<div class="result">
+
+<h3>Investment Summary</h3>
+
+<p>Expected Return:
+<strong id="expectedReturn">
+KES 0
+</strong></p>
+
+<p>Duration:
+<strong id="duration">
+30 Days
+</strong></p>
+
+</div>
+
+<button type="submit">
+    💰 Submit Investment
+</button>
+
+<a href="/dashboard" class="back-btn">
+    ← Return to Dashboard
+</a>
+</form>
+
+</div>
+
+<script>
+const rates = {
+    Bronze: { roi: 50, duration: "21 Days" },
+    Silver: { roi: 40, duration: "21 Days" },
+    Gold: { roi: 30, duration: "14 Days" },
+    Platinum: { roi: 25, duration: "180 Days" }
+};
+
+const plan = document.getElementById("plan");
+const amount = document.getElementById("amount");
+const form = document.getElementById("investmentForm");
+
+function calculate() {
+
+    const selected = rates[plan.value];
+
+    const value = Number(amount.value) || 0;
+
+    const profit = value * (selected.roi / 100);
+
+    document.getElementById("expectedReturn").innerText =
+        "KES " + profit.toLocaleString();
+
+    document.getElementById("duration").innerText =
+        selected.duration;
+
+}
+
+plan.addEventListener("change", calculate);
+amount.addEventListener("input", calculate);
+
+calculate();
+
+form.addEventListener("submit", async function(e){
+
+    e.preventDefault();
+
+    const selected = rates[plan.value];
+
+    const value = Number(amount.value);
+
+    const expectedReturn = value + (value * selected.roi / 100);
+
+    const res = await fetch("/invest",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+
+            plan: plan.value,
+            amount: value,
+            roi: selected.roi,
+            duration: selected.duration,
+            expectedReturn
+
+        })
+
+    });
+
+    const data = await res.json();
+
+    if(data.success){
+
+        alert("Investment created successfully!");
+
+        window.location.href="/member";
+
+    }else{
+
+        alert(data.message || "Investment failed.");
+
+    }
+
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>CEO Investments</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#eef3f9;
+}
+
+header{
+    background:#0057b8;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    width:95%;
+    margin:30px auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+}
+
+th{
+    background:#0057b8;
+    color:white;
+    padding:15px;
+}
+
+td{
+    padding:14px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+}
+
+tr:hover{
+    background:#f8f8f8;
+}
+
+button{
+    padding:8px 16px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    color:white;
+}
+
+.approve{
+    background:#27ae60;
+}
+
+.cancel{
+    background:#e74c3c;
+}
+
+.view{
+    background:#0057b8;
+}
+.top-bar{
+    width:95%;
+    margin:20px auto;
+}
+
+.back-btn{
+    display:inline-block;
+    background:#0057b8;
+    color:white;
+    text-decoration:none;
+    padding:12px 22px;
+    border-radius:8px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.back-btn:hover{
+    background:#004090;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Investment Management</h1>
+
+</header>
+<div class="top-bar">
+    <a href="/ceo" class="back-btn">
+        ← Return to Dashboard
+    </a>
+</div>
+<div class="container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Member</th>
+<th>Plan</th>
+<th>Amount</th>
+<th>Expected Return</th>
+<th>Status</th>
+<th>Date</th>
+<th>Actions</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tableBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+<script>
+
+async function loadInvestments(){
+
+const res=await fetch("/ceo/investments/json");
+
+const data=await res.json();
+
+let html="";
+
+data.forEach(inv=>{
+
+html+=`
+
+<tr>
+
+<td>${inv.member.fullname}</td>
+
+<td>${inv.plan}</td>
+
+<td>KES ${inv.amount.toLocaleString()}</td>
+
+<td>KES ${inv.expectedReturn.toLocaleString()}</td>
+
+<td>${inv.status}</td>
+
+<td>${new Date(inv.createdAt).toLocaleDateString()}</td>
+
+<td>
+
+<button class="view"
+onclick="viewInvestment('${inv._id}')">
+
+View
+
+</button>
+
+<button class="approve"
+onclick="approveInvestment('${inv._id}')">
+
+Approve
+
+</button>
+
+<button class="cancel"
+onclick="cancelInvestment('${inv._id}')">
+
+Cancel
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+document.getElementById("tableBody").innerHTML=html;
+
+}
+
+loadInvestments();
+
+function viewInvestment(id){
+
+location.href="/ceo/investment/"+id;
+
+}
+
+function approveInvestment(id){
+
+alert("Approve investment "+id);
+
+}
+
+function cancelInvestment(id){
+
+alert("Cancel investment "+id);
+
+}
+
+</script>
+
+</body>
+</html>

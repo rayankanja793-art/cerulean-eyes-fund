@@ -3,6 +3,8 @@ const router = express.Router();
 const path = require("path");
 
 const Loan = require("../models/Loan");
+const Investment = require("../models/Investment");
+const Deposit = require("../models/Deposit");
 const User = require("../models/User");
 
 // Change these later
@@ -45,7 +47,8 @@ router.get("/ceo", (req, res) => {
 });
 
 // CEO Statistics
-router.get("/ceo/json", async (req, res) => {
+
+router.get("/ceo/investments/json", async (req, res) => {
 
     if (!req.session.ceo) {
         return res.status(401).send("Unauthorized");
@@ -53,9 +56,10 @@ router.get("/ceo/json", async (req, res) => {
 
     try {
 
-        const loans = await Loan.find();
+        const investments = await Investment.find()
+            .populate("member");
 
-        res.json(loans);
+        res.json(investments);
 
     } catch (err) {
 
@@ -111,5 +115,90 @@ router.get("/ceo/members-page", (req, res) => {
     res.sendFile(path.join(__dirname, "../views/ceo-members.html"));
 
 });
+// CEO Members API
+router.get("/ceo/members", async (req, res) => {
 
+    if (!req.session.ceo) {
+        return res.status(401).send("Unauthorized");
+    }
+
+    try {
+
+        const members = await User.find().select(
+            "memberCode fullname phone email wallet createdAt"
+        );
+
+        res.json(members);
+
+    } catch (err) {
+
+        console.log(err);
+        res.status(500).send("Server Error");
+
+    }
+
+});
+
+// ===========================
+// Investment Plans Page
+// ===========================
+router.get("/invest", (req, res) => {
+
+    res.sendFile(path.join(__dirname, "../views/investments.html"));
+
+})
+// ===========================
+// Individual Investment Plan
+// ===========================
+router.get("/invest/:plan", (req, res) => {
+
+    res.sendFile(path.join(__dirname, "../views/invest-now.html"));
+
+});
+router.get("/ceo/investments", (req,res)=>{
+
+if(!req.session.ceo){
+return res.redirect("/ceo/login");
+}
+
+res.sendFile(path.join(__dirname,"../views/ceo-investments.html"));
+
+});
+// ===========================
+// CEO Deposits Page
+// ===========================
+router.get("/ceo/deposits", (req, res) => {
+
+    if (!req.session.ceo) {
+        return res.redirect("/ceo/login");
+    }
+
+    res.sendFile(path.join(__dirname, "../views/ceo-deposits.html"));
+
+});
+// ===========================
+// CEO Deposit List API
+// ===========================
+router.get("/ceo/deposits/json", async (req, res) => {
+
+    if (!req.session.ceo) {
+        return res.status(401).send("Unauthorized");
+    }
+
+    try {
+
+        const deposits = await Deposit.find()
+            .populate("member")
+            .sort({ createdAt: -1 });
+
+        res.json(deposits);
+
+    } catch (err) {
+
+        console.log(err);
+        res.status(500).send("Server Error");
+
+    }
+
+});
 module.exports = router;

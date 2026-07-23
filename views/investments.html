@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Investment Plans | Cerulean Funds</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#eef3f9;
+}
+
+header{
+    background:#0057b8;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+header h1{
+    font-size:36px;
+}
+
+header p{
+    margin-top:8px;
+    font-size:18px;
+}
+
+.container{
+    width:95%;
+    max-width:1200px;
+    margin:40px auto;
+}
+
+.title{
+    text-align:center;
+    color:#0057b8;
+    margin-bottom:40px;
+}
+
+.plans{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:25px;
+}
+
+.plan{
+    background:white;
+    border-radius:15px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+    transition:.3s;
+}
+
+.plan:hover{
+    transform:translateY(-8px);
+}
+
+.plan h2{
+    color:#0057b8;
+    margin-bottom:20px;
+}
+
+.price{
+    font-size:32px;
+    color:#27ae60;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+.plan ul{
+    list-style:none;
+    margin-bottom:25px;
+}
+
+.plan li{
+    padding:10px 0;
+    border-bottom:1px solid #eee;
+}
+
+.btn{
+    display:inline-block;
+    background:#0057b8;
+    color:white;
+    text-decoration:none;
+    padding:14px 28px;
+    border-radius:30px;
+    font-weight:bold;
+}
+
+.btn:hover{
+    background:#004090;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Cerulean Funds</h1>
+
+<p>Choose an Investment Plan</p>
+
+</header>
+
+<div class="container">
+
+<h2 class="title">
+Investment Plans
+</h2>
+
+<div class="plans">
+    <div class="plan">
+
+    <h2>🥉 Bronze</h2>
+
+    <div class="price">From KES 400-1,200</div>
+
+    <ul>
+        <li>50% Expected Return</li>
+        <li>21 Days</li>
+        <li>Minimum Investment: KES 400</li>
+    </ul>
+
+    <a href="/invest/bronze" class="btn">Invest Now</a>
+
+</div>
+
+<div class="plan">
+
+    <h2>🥈 Silver</h2>
+
+    <div class="price">From KES 1200-5,000</div>
+
+    <ul>
+        <li>40% Expected Return</li>
+        <li>21 Days</li>
+        <li>Minimum Investment: KES 1,200</li>
+    </ul>
+
+    <a href="/invest/silver" class="btn">Invest Now</a>
+
+</div>
+
+<div class="plan">
+
+    <h2>🥇 Gold</h2>
+
+    <div class="price">From KES 5,000-20,000+</div>
+
+    <ul>
+        <li>30% Expected Return</li>
+        <li>14 Days</li>
+        <li>Minimum Investment: KES 5,000</li>
+    </ul>
+
+    <a href="/invest/gold" class="btn">Invest Now</a>
+
+</div>
+
+<div class="plan">
+
+    <h2>💎 Platinum</h2>
+
+    <div class="price">From KES 100,000</div>
+
+    <ul>
+        <li>25% Expected Return</li>
+        <li>180 Days</li>
+        <li>Minimum Investment: KES 100,000</li>
+    </ul>
+
+    <a href="/invest/platinum" class="btn">Invest Now</a>
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

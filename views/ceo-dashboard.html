@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CEO Dashboard</title>
+<title>CEO Investment Dashboard</title>
 
 <style>
 
@@ -239,7 +239,7 @@ tbody tr:nth-child(even){
 
     <a href="/ceo/members-page">👥 Members</a>
 
-    <a href="/admin">💰 Loans</a>
+    <a href="/ceo/investments">📈 Investments</a>
 
     <a href="/ceo/deposits">🏦 Deposits</a>
 
@@ -248,29 +248,29 @@ tbody tr:nth-child(even){
 
 </div>
 <h1 class="title">
-    All Loan Applications
+    Investment Management Dashboard
 </h1>
 
 <div class="cards">
 
     <div class="card">
         <h2 id="totalLoans">0</h2>
-        <p>Total Loan Applications</p>
+     <p>Total Investments</p>
     </div>
 
     <div class="card">
         <h2 id="approvedLoans">0</h2>
-        <p>Approved Loans</p>
+       <p>Active Investments</p>
     </div>
 
     <div class="card">
         <h2 id="rejectedLoans">0</h2>
-        <p>Rejected Loans</p>
+     <p>Completed Investments</p>
     </div>
 
     <div class="card">
         <h2 id="pendingLoans">0</h2>
-        <p>Pending Loans</p>
+       <p>Pending Investments</p>
     </div>
 
 </div>
@@ -279,22 +279,22 @@ tbody tr:nth-child(even){
 
     <div class="card">
         <h2 id="totalRequested">KES 0</h2>
-        <p>Total Requested</p>
+        <p>Total Invested</p>
     </div>
 
     <div class="card">
         <h2 id="approvedAmount">KES 0</h2>
-        <p>Approved Amount</p>
+        <p>Active Capital</p>
     </div>
 
     <div class="card">
         <h2 id="pendingAmount">KES 0</h2>
-        <p>Pending Amount</p>
+        <p>Pending Deposits</p>
     </div>
 
     <div class="card">
         <h2 id="rejectedAmount">KES 0</h2>
-        <p>Rejected Amount</p>
+       <p>Total Returns Paid</p>
     </div>
 
 </div>
@@ -302,7 +302,7 @@ tbody tr:nth-child(even){
     <input
         type="text"
         id="searchBox"
-        placeholder="🔍 Search by Name, Phone, Email or Purpose..."
+      placeholder="🔍 Search members or investments..."
     >
 </div>
 <div class="filter-buttons">
@@ -329,17 +329,17 @@ tbody tr:nth-child(even){
 <div class="charts">
 
     <div class="chart-card">
-        <h3>📊 Loan Status Distribution</h3>
+        <h3>📊 Investment Status</h3>
         <canvas id="statusChart"></canvas>
     </div>
 
     <div class="chart-card">
-        <h3>💰 Loan Amount Summary</h3>
+        <h3>💰 Investment Portfolio</h3>
         <canvas id="amountChart"></canvas>
     </div>
 
 </div>
-<h2 class="section-title">All Loan Applications</h2>
+<h2 class="section-title">All Investments</h2>
 
 <table>
 
@@ -350,11 +350,10 @@ tbody tr:nth-child(even){
 <th>Name</th>
 <th>Phone</th>
 <th>Email</th>
-<th>Amount</th>
-<th>Duration</th>
-<th>Purpose</th>
+<th>Investment</th>
+<th>Plan</th>
+<th>Expected Return</th>
 <th>Status</th>
-
 </tr>
 
 </thead>
@@ -385,54 +384,56 @@ tbody tr:nth-child(even){
 
 <script>
 
-fetch("/ceo/json")
+fetch("/ceo/investments/json")
 .then(res => res.json())
-.then(loans => {
+.then(investments => {
 
     // =========================
     // Financial Statistics
     // =========================
 
-    const totalRequested = loans.reduce((sum, loan) => sum + loan.amount, 0);
+    const totalInvested = investments.reduce(
+    (sum, investment) => sum + investment.amount,
+    0
+);
 
-    const approvedAmount = loans
-        .filter(loan => loan.status === "Approved")
-        .reduce((sum, loan) => sum + loan.amount, 0);
+    const activeCapital = investments
+    .filter(investment => investment.status === "Active")
+    .reduce((sum, investment) => sum + investment.amount, 0);
 
-    const pendingAmount = loans
-        .filter(loan => loan.status === "Pending")
-        .reduce((sum, loan) => sum + loan.amount, 0);
+const pendingDeposits = investments
+    .filter(investment => investment.status === "Pending")
+    .reduce((sum, investment) => sum + investment.amount, 0);
 
-    const rejectedAmount = loans
-        .filter(loan => loan.status === "Rejected")
-        .reduce((sum, loan) => sum + loan.amount, 0);
+const completedReturns = investments
+    .filter(investment => investment.status === "Completed")
+    .reduce((sum, investment) => sum + investment.amount, 0);
 
-    document.getElementById("totalRequested").innerText =
-        "KES " + totalRequested.toLocaleString();
+document.getElementById("totalRequested").innerText =
+    "KES " + totalInvested.toLocaleString();
 
-    document.getElementById("approvedAmount").innerText =
-        "KES " + approvedAmount.toLocaleString();
+document.getElementById("approvedAmount").innerText =
+    "KES " + activeCapital.toLocaleString();
 
-    document.getElementById("pendingAmount").innerText =
-        "KES " + pendingAmount.toLocaleString();
+document.getElementById("pendingAmount").innerText =
+    "KES " + pendingDeposits.toLocaleString();
 
-    document.getElementById("rejectedAmount").innerText =
-        "KES " + rejectedAmount.toLocaleString();
-
+document.getElementById("rejectedAmount").innerText =
+    "KES " + completedReturns.toLocaleString();
     // =========================
     // Statistics Cards
     // =========================
 
-    document.getElementById("totalLoans").innerText = loans.length;
+    document.getElementById("totalLoans").innerText = investments.length;
 
-    document.getElementById("approvedLoans").innerText =
-        loans.filter(loan => loan.status === "Approved").length;
+document.getElementById("approvedLoans").innerText =
+    investments.filter(investment => investment.status === "Active").length;
 
-    document.getElementById("rejectedLoans").innerText =
-        loans.filter(loan => loan.status === "Rejected").length;
+document.getElementById("rejectedLoans").innerText =
+    investments.filter(investment => investment.status === "Completed").length;
 
-    document.getElementById("pendingLoans").innerText =
-        loans.filter(loan => loan.status === "Pending").length;
+document.getElementById("pendingLoans").innerText =
+    investments.filter(investment => investment.status === "Pending").length;
 
     // =========================
     // Loan Table
@@ -441,33 +442,39 @@ fetch("/ceo/json")
     const table = document.getElementById("loanTable");
     table.innerHTML = "";
 
-    loans.forEach(loan => {
+investments.forEach(investment => {
 
-        table.innerHTML += `
-        <tr>
-            <td>${loan.fullName || "-"}</td>
-            <td>${loan.phone || "-"}</td>
-            <td>${loan.userEmail}</td>
+    table.innerHTML += `
+    <tr>
 
-            <td>
-                <strong style="color:#0057b8;">
-                    KES ${loan.amount.toLocaleString()}
-                </strong>
-            </td>
+        <td>${investment.member?.fullname || "-"}</td>
 
-            <td><strong>${loan.duration}</strong></td>
+        <td>${investment.member?.phone || "-"}</td>
 
-            <td>${loan.purpose}</td>
+        <td>${investment.member?.email || "-"}</td>
 
-            <td>
-                <span class="status ${loan.status.toLowerCase()}">
-                    ${loan.status}
-                </span>
-            </td>
-        </tr>
-        `;
-    });
+        <td>
+            <strong style="color:#0057b8;">
+                KES ${investment.amount.toLocaleString()}
+            </strong>
+        </td>
 
+        <td>${investment.plan || "-"}</td>
+
+        <td>
+            KES ${(investment.expectedReturn || 0).toLocaleString()}
+        </td>
+
+        <td>
+            <span class="status ${investment.status.toLowerCase()}">
+                ${investment.status}
+            </span>
+        </td>
+
+    </tr>
+    `;
+
+});
     // =========================
     // Status Pie Chart
     // =========================
@@ -477,13 +484,13 @@ fetch("/ceo/json")
         type: "pie",
 
         data: {
-            labels: ["Approved", "Pending", "Rejected"],
-            datasets: [{
-                data: [
-                    loans.filter(l => l.status === "Approved").length,
-                    loans.filter(l => l.status === "Pending").length,
-                    loans.filter(l => l.status === "Rejected").length
-                ],
+         labels: ["Active", "Pending", "Completed"],
+datasets: [{
+    data: [
+        investments.filter(i => i.status === "Active").length,
+        investments.filter(i => i.status === "Pending").length,
+        investments.filter(i => i.status === "Completed").length
+    ],
                 backgroundColor: [
                     "#27ae60",
                     "#f39c12",
@@ -514,21 +521,21 @@ fetch("/ceo/json")
         data: {
 
             labels: [
-                "Total Requested",
-                "Approved",
-                "Pending",
-                "Rejected"
-            ],
+    "Total Invested",
+    "Active Capital",
+    "Pending Deposits",
+    "Returns Paid"
+],
 
             datasets: [{
                 label: "KES",
 
-                data: [
-                    totalRequested,
-                    approvedAmount,
-                    pendingAmount,
-                    rejectedAmount
-                ],
+               data: [
+    totalInvested,
+    activeCapital,
+    pendingDeposits,
+    completedReturns
+],
 
                 backgroundColor: [
                     "#3498db",
