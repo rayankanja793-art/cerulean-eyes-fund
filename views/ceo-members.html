@@ -65,7 +65,71 @@ tbody tr:hover{
     color:#27ae60;
     font-weight:bold;
 }
+/* ===========================
+   Mobile Responsive
+=========================== */
 
+@media (max-width:768px){
+
+    .navbar{
+        flex-direction:column;
+        align-items:flex-start;
+        padding:20px;
+        gap:15px;
+    }
+
+    .navbar h2{
+        margin:0;
+        font-size:24px;
+    }
+
+    .navbar div{
+        display:flex;
+        flex-wrap:wrap;
+        gap:15px;
+    }
+
+    .navbar a{
+        margin:0;
+        font-size:15px;
+    }
+
+    .container{
+        width:100%;
+        padding:15px;
+        margin:0;
+        box-sizing:border-box;
+    }
+
+    h1{
+        font-size:30px;
+        margin-bottom:20px;
+    }
+
+    /* Make the table scroll horizontally */
+    .table-wrapper{
+        width:100%;
+        overflow-x:auto;
+        -webkit-overflow-scrolling:touch;
+    }
+
+    table{
+        min-width:700px;
+    }
+
+    th,
+    td{
+        padding:12px;
+        font-size:14px;
+        white-space:nowrap;
+    }
+
+    td:nth-child(2),
+    td:nth-child(4){
+        white-space:normal;
+    }
+
+}
 </style>
 
 </head>
@@ -88,18 +152,18 @@ tbody tr:hover{
 
 <h1>All Members</h1>
 
+<div class="table-wrapper">
+
 <table>
 
 <thead>
 
 <tr>
-
 <th>Member Code</th>
 <th>Name</th>
 <th>Phone</th>
 <th>Email</th>
 <th>Wallet</th>
-
 </tr>
 
 </thead>
@@ -110,47 +174,17 @@ tbody tr:hover{
 
 </div>
 
+</div>
+
 <script>
 
-fetch("/ceo/members/json")
-.then(res=>res.json())
-.then(members=>{
-
-    const table=document.getElementById("memberTable");
-
-    table.innerHTML="";
-
-    members.forEach(member=>{
-
-        table.innerHTML+=`
-        <tr>
-
-        <td>${member.memberCode}</td>
-
-        <td>${member.fullname}</td>
-
-        <td>${member.phone}</td>
-
-        <td>${member.email}</td>
-
-        <td class="wallet">
-            KES ${member.wallet.toLocaleString()}
-        </td>
-
-        </tr>
-        `;
-
-    });
-
-});
 fetch("/ceo/members/json")
 .then(res => res.json())
 .then(members => {
 
-    console.log(members);   // 👈 Add this
+    console.log(members);
 
     const table = document.getElementById("memberTable");
-
     table.innerHTML = "";
 
     members.forEach(member => {
@@ -166,10 +200,12 @@ fetch("/ceo/members/json")
             </td>
         </tr>
         `;
+
     });
 
 })
 .catch(err => console.log(err));
+
 </script>
 
 </body>
