@@ -111,6 +111,69 @@ nav{
 .table-container{
     overflow-x:auto;
 }
+.header-container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.header-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.logo-section{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.logo{
+    height:60px;
+}
+
+.logo-section h1{
+    margin:0;
+    font-size:30px;
+}
+
+.logo-section p{
+    margin-top:5px;
+}
+
+.nav-links{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:15px;
+}
+
+@media(max-width:768px){
+
+    .header-top{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .logo-section{
+        flex-direction:column;
+    }
+
+    .nav-links{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .nav-link{
+        width:100%;
+        text-align:center;
+        padding:12px;
+        background:rgba(255,255,255,0.12);
+        border-radius:10px;
+    }
+
+}
 </style>
 
 </head>
@@ -118,42 +181,43 @@ nav{
 <body>
 
 <header>
+<div class="header-container">
 
-<div style="display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:auto;">
+    <div class="header-top">
 
-<div style="display:flex;align-items:center;gap:15px;">
+        <div class="logo-section">
 
-    <img
-        src="/images/logo.png"
-        alt="Cerulean Funds Logo"
-        style="height:60px;">
+            <img
+                src="/images/logo.png"
+                alt="Cerulean Funds Logo"
+                class="logo">
 
-    <div>
+            <div>
 
-        <h1 style="margin:0;">Cerulean Funds</h1>
+                <h1>Cerulean Funds</h1>
 
-        <p style="margin-top:5px;">
-            Welcome back,
-            <strong id="memberName">Member</strong> 👋
-        </p>
+                <p>
+                    Welcome back,
+                    <strong id="memberName">Member</strong> 👋
+                </p>
+
+            </div>
+
+        </div>
 
     </div>
 
-</div>
+    <div class="nav-links">
 
-<a href="/dashboard" class="nav-link">🏠 Dashboard</a>
+        <a href="/dashboard" class="nav-link">🏠 Dashboard</a>
+        <a href="/profile" class="nav-link">👤 Profile</a>
+        <a href="/my-loans" class="nav-link">📄 My Loans</a>
+        <a href="/deposit" class="nav-link">💳 Deposit</a>
+        <a href="/transfer" class="nav-link">💸 Transfer</a>
+        <a href="/history" class="nav-link">📜 History</a>
+        <a href="/logout" class="nav-link logout">🚪 Logout</a>
 
-<a href="/profile" class="nav-link">👤 Profile</a>
-
-<a href="/my-loans" class="nav-link">📄 My Loans</a>
-
-<a href="/deposit" class="nav-link">💳 Deposit</a>
-
-<a href="/transfer" class="nav-link">💸 Transfer</a>
-
-<a href="/history" class="nav-link">📜 History</a>
-
-<a href="/logout" class="nav-link logout">🚪 Logout</a>
+    </div>
 
 </div>
 
