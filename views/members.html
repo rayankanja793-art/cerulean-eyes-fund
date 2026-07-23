@@ -19,18 +19,29 @@ body{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:20px 40px;
+    flex-wrap:wrap;
+    gap:15px;
+    padding:20px;
     border-radius:12px;
     margin-bottom:30px;
+}
+
+.navbar h2{
+    margin:0;
+    font-size:28px;
+}
+
+.navbar div{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
 }
 
 .navbar a{
     color:white;
     text-decoration:none;
-    margin-left:20px;
     font-weight:bold;
 }
-
 .card{
     background:white;
     padding:25px;
@@ -170,19 +181,22 @@ tbody tr:hover{
 </div>
 <div style="margin-bottom:20px;">
 
-    <input
-        type="text"
-        id="searchBox"
-        placeholder="🔍 Search by Name, Email or Phone..."
-        style="
-            width:320px;
-            padding:12px;
-            border:2px solid #0057b8;
-            border-radius:8px;
-            font-size:15px;
-        ">
+ <input
+type="text"
+id="searchBox"
+placeholder="🔍 Search by Name, Email or Phone..."
+style="
+width:100%;
+max-width:350px;
+padding:12px;
+border:2px solid #0057b8;
+border-radius:8px;
+font-size:15px;
+">
 
 </div>
+<div class="table-container">
+
 <table>
 
 <thead>
@@ -202,6 +216,8 @@ tbody tr:hover{
 <tbody id="membersTable"></tbody>
 
 </table>
+
+</div>
 <!-- MEMBER PROFILE MODAL -->
 
 <div id="memberModal" class="modal">
