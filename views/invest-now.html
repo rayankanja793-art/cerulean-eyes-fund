@@ -13,6 +13,69 @@
     <h2 id="walletBalance">
         KES 0
     </h2>
+<div class="portfolio-summary">
+
+    <h3>📊 Portfolio Summary</h3>
+
+    <div class="summary-grid">
+
+        <div class="card">
+            <span>Total Invested</span>
+            <h2 id="totalInvested">KES 0</h2>
+        </div>
+
+        <div class="card">
+            <span>Current Value</span>
+            <h2 id="currentValue">KES 0</h2>
+        </div>
+
+        <div class="card">
+            <span>Total Profit</span>
+            <h2 id="totalProfit">KES 0</h2>
+        </div>
+
+        <div class="card">
+            <span>ROI</span>
+            <h2 id="roi">0%</h2>
+        </div>
+
+        <div class="card">
+            <span>Active Investments</span>
+            <h2 id="activeInvestments">0</h2>
+        </div>
+
+    </div>
+
+</div>
+</div>
+<div class="active-investments">
+
+<h3>📂 Active Investments</h3>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Plan</th>
+<th>Amount</th>
+<th>Status</th>
+<th>Profit</th>
+</tr>
+
+</thead>
+
+<tbody id="investmentTable">
+
+<tr>
+<td colspan="4" style="text-align:center;">
+No active investments
+</td>
+</tr>
+
+</tbody>
+
+</table>
 
 </div>
 <style>
@@ -119,6 +182,58 @@ button:hover{
 .wallet-box h2{
     margin-top:10px;
     font-size:36px;
+}
+.portfolio-summary{
+    margin-bottom:30px;
+}
+
+.portfolio-summary h3{
+    color:#0057b8;
+    margin-bottom:15px;
+}
+
+.summary-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+}
+
+.card{
+    background:#fff;
+    border-radius:12px;
+    padding:18px;
+    box-shadow:0 5px 12px rgba(0,0,0,.08);
+    text-align:center;
+}
+
+.card span{
+    color:#666;
+    font-size:14px;
+}
+
+.card h2{
+    margin-top:8px;
+    color:#0057b8;
+}
+.active-investments{
+    margin-top:30px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#0057b8;
+    color:white;
+    padding:12px;
+}
+
+td{
+    padding:12px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
 }
 </style>
 

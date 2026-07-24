@@ -174,6 +174,64 @@ nav{
     }
 
 }
+.whatsapp-banner{
+    max-width:1200px;
+    margin:25px auto;
+    padding:0 15px;
+}
+
+.whatsapp-content{
+    background:linear-gradient(135deg,#25D366,#128C7E);
+    color:white;
+    border-radius:18px;
+    padding:30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:25px;
+    box-shadow:0 10px 25px rgba(37,211,102,.25);
+}
+
+.whatsapp-content h2{
+    margin:0 0 10px;
+    font-size:28px;
+}
+
+.whatsapp-content p{
+    margin:0;
+    line-height:1.7;
+    opacity:.95;
+}
+
+.whatsapp-btn{
+    background:white;
+    color:#128C7E;
+    text-decoration:none;
+    padding:16px 30px;
+    border-radius:40px;
+    font-weight:bold;
+    white-space:nowrap;
+    transition:.3s;
+}
+
+.whatsapp-btn:hover{
+    transform:translateY(-3px);
+    background:#f5f5f5;
+}
+
+@media(max-width:768px){
+
+    .whatsapp-content{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .whatsapp-btn{
+        width:100%;
+        text-align:center;
+    }
+
+}
 </style>
 
 </head>
@@ -249,8 +307,31 @@ nav{
 </div>
 
 </div>
+<div class="whatsapp-banner">
 
+    <div class="whatsapp-content">
 
+        <div>
+
+            <h2>🚀 Invest with Cerulean Funds</h2>
+
+            <p>
+                Interested in investing or increasing your investment? Contact us on WhatsApp and our team will guide you through the investment process.
+            </p>
+
+            <p style="margin-top:15px;">
+                <strong>📢 Notice:</strong> At the moment, the investment option is not yet available directly on the website. If you would like to invest, please contact us on WhatsApp and we will assist you personally. We are currently upgrading the platform, and soon you'll be able to invest directly from your dashboard with just a few clicks.
+            </p>
+
+        </div>
+
+        <a href="https://wa.me/254782842077" target="_blank" class="whatsapp-btn">
+            💬 Contact Us on WhatsApp
+        </a>
+
+    </div>
+
+</div>
 <div class="container">
 
 <div class="card" style="grid-column:1/-1;text-align:left;">
