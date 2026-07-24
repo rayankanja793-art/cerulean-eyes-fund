@@ -94,7 +94,7 @@ router.post("/invest", async (req, res) => {
 
         res.json({
             success: true,
-            message: "Investment created successfully."
+            message: "investment created successfully."
         });
 
     } catch (err) {
@@ -109,5 +109,36 @@ router.post("/invest", async (req, res) => {
     }
 
 });
+router.get("/my-investments", async (req, res) => {
 
+    try {
+
+        if (!req.session.userId) {
+            return res.status(401).json({
+                success: false,
+                message: "Please login first."
+            });
+        }
+
+        const investments = await Investment
+            .find({ member: req.session.userId })
+            .sort({ createdAt: -1 });
+
+        res.json({
+            success: true,
+            investments
+        });
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.status(500).json({
+            success: false,
+            message: "Server Error"
+        });
+
+    }
+
+});
 module.exports = router;

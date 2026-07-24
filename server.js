@@ -76,8 +76,13 @@ app.get("/", (req, res) => {
 // ===========================
 app.get("/invest", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "invest.html"));
+    });
+// ===========================
+// My Investments Page
+// ===========================
+app.get("/my-investments-page", (req, res) => {
+    res.sendFile(path.join(__dirname, "views", "my-investments.html"));
 });
-
 // ===========================
 // Portal Login Page
 // ===========================
