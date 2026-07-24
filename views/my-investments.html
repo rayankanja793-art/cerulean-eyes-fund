@@ -73,7 +73,21 @@ header{
     color:#0057b8;
     font-weight:bold;
 }
+.download-btn{
+    margin-top:20px;
+    background:#0057b8;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:bold;
+}
 
+.download-btn:hover{
+    background:#004090;
+}
 </style>
 
 </head>
@@ -122,57 +136,58 @@ Loading...
 <script>
 
 fetch("/my-investments")
-.then(res=>res.json())
-.then(data=>{
+.then(res => res.json())
+.then(data => {
 
-    const list=document.getElementById("investmentList");
+    const list = document.getElementById("investmentList");
 
-    list.innerHTML="";
+    list.innerHTML = "";
 
-    let totalInvested=0;
-    let totalReturns=0;
+    let totalInvested = 0;
+    let totalReturns = 0;
 
-    document.getElementById("activePlans").innerText=data.investments.length;
+    document.getElementById("activePlans").innerText = data.investments.length;
 
-    if(data.investments.length===0){
+    if (data.investments.length === 0) {
 
-        list.innerHTML=`
+        list.innerHTML = `
         <div class="investment-card">
-
-        <h2>No Investments Yet</h2>
-
-        <p>You have not made any investments.</p>
-
+            <h2>No Investments Yet</h2>
+            <p>You have not made any investments.</p>
         </div>`;
 
         return;
-
     }
 
-    data.investments.forEach(inv=>{
+    data.investments.forEach(inv => {
 
-        totalInvested+=inv.amount;
-        totalReturns+=inv.expectedReturn;
+        totalInvested += inv.amount;
+        totalReturns += inv.expectedReturn;
 
-        list.innerHTML+=`
+        list.innerHTML += `
 
         <div class="investment-card">
 
-        <h2>${inv.plan} Plan</h2>
+            <h2>${inv.plan} Plan</h2>
 
-        <span class="status">${inv.status}</span>
+            <span class="status">${inv.status}</span>
 
-        <p><strong>Amount:</strong> KES ${inv.amount.toLocaleString()}</p>
+            <p><strong>Amount:</strong> KES ${inv.amount.toLocaleString()}</p>
 
-        <p><strong>Expected Return:</strong> KES ${inv.expectedReturn.toLocaleString()}</p>
+            <p><strong>Expected Return:</strong> KES ${inv.expectedReturn.toLocaleString()}</p>
 
-        <p><strong>ROI:</strong> ${inv.roi}%</p>
+            <p><strong>ROI:</strong> ${inv.roi}%</p>
 
-        <p><strong>Duration:</strong> ${inv.duration}</p>
+            <p><strong>Duration:</strong> ${inv.duration}</p>
 
-        <p><strong>Started:</strong> ${new Date(inv.startDate).toLocaleDateString()}</p>
+            <p><strong>Started:</strong> ${new Date(inv.startDate).toLocaleDateString()}</p>
 
-        <p><strong>Matures:</strong> ${new Date(inv.maturityDate).toLocaleDateString()}</p>
+            <p><strong>Matures:</strong> ${new Date(inv.maturityDate).toLocaleDateString()}</p>
+
+            <button class="download-btn"
+                    onclick="downloadPDF('${inv._id}')">
+                📄 Download PDF
+            </button>
 
         </div>
 
@@ -180,15 +195,19 @@ fetch("/my-investments")
 
     });
 
-    document.getElementById("totalInvested").innerText=
-        "KES "+totalInvested.toLocaleString();
+    document.getElementById("totalInvested").innerText =
+        "KES " + totalInvested.toLocaleString();
 
-    document.getElementById("expectedReturns").innerText=
-        "KES "+totalReturns.toLocaleString();
+    document.getElementById("expectedReturns").innerText =
+        "KES " + totalReturns.toLocaleString();
 
-});
+})
+.catch(err => console.error(err));
+
+function downloadPDF(id) {
+    window.location.href = "/investment/" + id + "/pdf";
+}
 
 </script>
-
 </body>
 </html>
